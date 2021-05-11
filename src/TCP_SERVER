@@ -1,6 +1,6 @@
 void TCP_Server(void)
 {
-	struct netconn *conn,newconn;
+	struct netconn *conn, *newconn;
 	err_t err,accept_err;
 	conn = netcon_new(NETCONN_TCP);
 	if(conn != NULL)
