@@ -1,0 +1,23 @@
+void TCP_Server(void)
+{
+	struct netconn *conn,newconn;
+	err_t err,accept_err;
+	conn = netcon_new(NETCONN_TCP);
+	if(conn != NULL)
+	{
+		err = netconn_bind(conn,NULL,80);
+		if(err == ERR_OK)
+		{
+			netconn_listen(conn);
+			while(1)
+			{
+				accept_err = netconn_accept(conn,&newconn);
+				if(accept_err == ERR_OK)
+				{
+					netconn_write(newconn,"Hello word",10,NETCONN_COPY);
+					netconn_close(newconn);
+				}
+			}
+		}
+	}
+}
