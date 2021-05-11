@@ -1,0 +1,20 @@
+void TCP_Client(void)
+{
+	struct netconn *conn;
+	err_t err;
+	ip_addr_t IP;
+	IP4_ADDR(&IP,192,168,1,11);
+	conn = netconn_new(NETCONN_TCP);
+	if(conn != NULL)
+	{
+		err = netconn_bind(conn,NULL,4555);
+		if(err == ERR_OK)
+		{
+			err = netconn_connect(conn,&IP,5444);
+		}
+	}
+	else
+	{
+		netconn_delete(conn);
+	}
+}
